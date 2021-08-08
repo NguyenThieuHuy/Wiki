@@ -1,0 +1,7 @@
+{% extends 'tasks/layout.html' %}
+
+{% block body %}
+    <a class="btn btn-primary" href="/note/{{ entrySubject }}/edit" role="button">Edit</a>    
+        <h1>{{ entrySubject}}</h1>
+        {{ entry|safe }}
+{% endblock %}

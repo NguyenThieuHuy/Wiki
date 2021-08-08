@@ -1,0 +1,31 @@
+{% extends 'tasks/layout.html' %}
+
+
+{% block body %}
+    {% if edit %}
+        <h1>Editing {{ entrySubject }}</h1>
+        <form action="{% url 'delete' %}" method="post">
+        {% csrf_token %}
+        <input type = submit class="btn btn-secondary" role="button" value ="Delete">
+        <div style = "display : none;">{{ form.as_p }}</div>
+        </form>
+
+    {% else %}
+        <h1>New content</h1>
+    {% endif %}
+    {% if existing %}
+    <div class="alert alert-danger" role="alert">
+        This entry already exists. If you want to view or edit it, <a href="/wiki/{{ entry }}" class="alert-link">click here</a>.
+    </div>
+    <div class="alert alert-info" role="alert">
+        Or you can change the entry name down here.
+    </div>
+    {% endif %}
+    <div class="form-group">
+        <form action="{% url 'add' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <input type = submit class="btn btn-primary" role="button">
+        </form>
+    </div>     
+{% endblock %}

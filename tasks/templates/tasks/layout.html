@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Tasks</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+        <style>
+        /* The sidebar menu */
+        .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 160px; /* Set the width of the sidebar */
+        position: fixed; 
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #111; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+        color: #f1f1f1;
+        }
+
+        /* Style page content */
+        .main {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+        }
+        </style>
+        <!---->
+        <style>
+          .icon-input-btn{
+              display: inline-block;
+              position: relative;
+          }
+          .icon-input-btn input[type="submit"]{
+              padding-left: 2em;
+          }
+
+          .icon-input-btn .glyphicon{
+              display: inline-block;
+              position: absolute;
+              left: 0.65em;
+              top: 30%;
+          }
+      </style> 
+          {% load static %} 
+    </head>
+    <body>
+        <!-- Modal -->
+<div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">About this site</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Note is a free online tool that you can use to write down what you have in mind.
+
+        <br>Each Note entry can be viewed by visiting that entry’s page. Notice that the name of the requested page (HTML) is specified in the route /note/HTML. Recognize too, that the page’s content must just be HTML that your browser renders.
+
+        <br>In practice, it would start to get tedious if every page on Note had to be written in HTML. Instead, it can be helpful to store Note entries using a lighter-weight human-friendly markup language. Note happens to use a markup language called Markdown.
+
+        <br>Read through GitHub’s Markdown guide to get an understanding for how Markdown’s syntax works. Pay attention in particular to what Markdown syntax looks like for headings, bold text, links, and lists.
+
+        <br>By having one Markdown file represent each Note entry, we can make our entries more human-friendly to write and edit. When a user views our Note entry, though, we’ll need to convert that Markdown into HTML before displaying it to the user.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <nav class="navbar navbar-expand-md" style="background-color: #111;">
+            <form class="searchbar" style = "margin: auto;" action="{% url 'search' %}" method="GET">
+                <input name="q" class="search_input" type="search" name="" placeholder="Search...">
+                <span class="icon-input-btn"><span class="glyphicon glyphicon-search"></span> <input type="submit" class="btn btn-primary btn-xs" value="Search"></span> 
+            </form>      
+        </nav>
+        <div class="container-fluid row" >
+        <div class="sidenav col-sm-3" >
+        <img src="{% static 'media/logo.png' %}" alt="logo" style="max-width: 145px;"/>
+        <a href="" data-toggle="modal" data-target="#staticBackdrop">About</a>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'add' %}">New note</a>
+        <div>
+            <a href="{% url 'random' %}" role="button">Random</a>
+        </div>
+        </div>
+        <div class="col-sm-9 main">
+        {% block body %}
+        
+        {% endblock body %}
+        </div>
+        </div>
+        <nav class="navbar navbar-expand-md navbar-light bg-transparent">
+        
+        </nav>
+
+        <!--script-->             
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $(".icon-input-btn").each(function(){
+                  var btnFont = $(this).find(".btn").css("font-size");
+                  var btnColor = $(this).find(".btn").css("color");
+              $(this).find(".glyphicon").css("font-size", btnFont);
+                  $(this).find(".glyphicon").css("color", btnColor);
+                  if($(this).find(".btn-xs").length){
+                      $(this).find(".glyphicon").css("top", "24%");
+                  }
+            }); 
+          });
+          </script> 
+    
+        <!---->
+    </body>
+
+</html>

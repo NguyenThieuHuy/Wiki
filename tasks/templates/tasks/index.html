@@ -1,0 +1,16 @@
+{% extends 'tasks/layout.html' %}
+
+{% block body %}
+        <h1>All of your NOTES</h1>
+        <ul>
+            {% for entry in entries %}
+            <a href = "/note/{{ entry }}" ><li>{{ entry }}</li></a>
+            {% empty %}
+            <div class="alert alert-info" role="alert">
+                No note available. Visit <a href="{% url 'add' %}">This page</a> to make a new note.
+            </div>
+            {% endfor %}
+        </ul>
+
+
+{% endblock %}
